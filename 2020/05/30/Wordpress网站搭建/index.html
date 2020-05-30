@@ -15,8 +15,8 @@
 <meta property="og:site_name" content="Robin&#39;s site">
 <meta property="og:description" content="终于搭成了个人博客，也理应做个小小的回忆录，如果能有幸帮到一些小伙伴完成搭建自然更好，不过由于是回忆，难免会有疏漏了——2019.1.25   Wordpress博客已经废弃，重新在github托管下重建了新个人博客，希望能坚持下去吧——2020.5.30  总体来说搭建博客就是两步，配置服务器+在服务器上安装wordpress博客平台，以下就是大致的搭建过程 1.购买云服务器既然要搭建网站，服">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/1547865698684.png">
-<meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/1547866879623.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547865698684.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547866879623.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547866930142.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547735671480.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547981213411.png">
@@ -30,11 +30,11 @@
 <meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547983639080.png">
 <meta property="og:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547983823553.png">
 <meta property="article:published_time" content="2020-05-30T12:53:35.000Z">
-<meta property="article:modified_time" content="2020-05-30T13:20:47.470Z">
+<meta property="article:modified_time" content="2020-05-30T13:22:51.947Z">
 <meta property="article:author" content="Robin">
 <meta property="article:tag" content="notes">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/1547865698684.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547865698684.png">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -166,12 +166,11 @@
 </blockquote>
 <p><strong>总体来说搭建博客就是两步，配置服务器+在服务器上安装wordpress博客平台</strong>，以下就是大致的搭建过程</p>
 <h2 id="1-购买云服务器"><a href="#1-购买云服务器" class="headerlink" title="1.购买云服务器"></a>1.购买云服务器</h2><p>既然要搭建网站，服务器自然是必不可少的，这里推荐阿里云的学生服务器，还能享受一段时间的学生红利，只需要9.5元一个月，相当的划算</p>
-<p>在搜索栏中搜索学生服务器</p>
-<p><img src="1547865698684.png" alt="1547865698684"></p>
+<p>在搜索栏中搜索学生服务器<img src="Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547865698684.png" alt="1547865698684"></p>
 <p>选择云服务器ECS，CentOS环境及自选的地域和时长，立即购买</p>
 <p>购买完毕后进入控制台，进入服务器的管理界面，就可以看到服务器的公网IP地址</p>
 <p>至此，拥有了属于自己的服务器</p>
-<h2 id="2-使用SSH工具远程连接服务器"><a href="#2-使用SSH工具远程连接服务器" class="headerlink" title="2.使用SSH工具远程连接服务器"></a>2.使用SSH工具远程连接服务器</h2><p>我们的网站是在服务器上搭建的，拥有了服务器之后需要通过一些远程连接工具连接到服务器，这样的工具不胜枚举，在此推荐<a href="https://www.termius.com/windows" target="_blank" rel="noopener">Termius</a>，下载完毕后，需要添加host，点击<img src="1547866879623.png" alt="1547866879623"></p>
+<h2 id="2-使用SSH工具远程连接服务器"><a href="#2-使用SSH工具远程连接服务器" class="headerlink" title="2.使用SSH工具远程连接服务器"></a>2.使用SSH工具远程连接服务器</h2><p>我们的网站是在服务器上搭建的，拥有了服务器之后需要通过一些远程连接工具连接到服务器，这样的工具不胜枚举，在此推荐<a href="https://www.termius.com/windows" target="_blank" rel="noopener">Termius</a>，下载完毕后，需要添加host，点击<img src="Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547866879623.png" alt="1547866879623"></p>
 <p>主要是在<img src="Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA.assets/1547866930142.png" alt="1547866930142">栏填写服务器的IP地址，其他的按此前设置的填写即可（用户名一般是root，密码是购买服务器后设置的实例密码），这样会一直保存一个host而不用每次登入服务器都需要输入密码了</p>
 <p>至此，成功地通过Termius连接到了服务器</p>
 <h2 id="3-在服务器上安装一些基本工具"><a href="#3-在服务器上安装一些基本工具" class="headerlink" title="3.在服务器上安装一些基本工具"></a>3.在服务器上安装一些基本工具</h2><p>在上一步通过Termius登录到服务器之后，是没有可视化界面的，一切操作都是在命令行中输入相应命令完成，而且这个时候服务器是个空空如也的空壳，需要安装一些基本的工具，暂时有用的没用的都先装上</p>
@@ -237,7 +236,7 @@
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年05月30日 21:20</p>
+        <p>最后更新： 2020年05月30日 21:22</p>
         <p>原始链接： <a class="post-url" href="/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" title="Wordpress网站搭建">http://yoursite.com/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</a></p>
         <footer>
             <a href="http://yoursite.com">

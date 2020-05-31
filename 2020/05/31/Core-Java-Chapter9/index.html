@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Core Java Chapter9 | Robin&#39;s site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Robin,Robin's Blog" />
+  
+  <meta name="description" content="Chapter9 Collections9.1 The Java Collections FrameworkJava最初只提供了很少但最有用的一系列数据结构：Vector, Stack, Hashtable, BitSet, Enumeration （Interfaces） Java1.2，设计者认为是时候推出full-fledged的数据结构，不像C++的STL那么复杂但又要想STL一样gene">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Core Java Chapter9">
+<meta property="og:url" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/index.html">
+<meta property="og:site_name" content="Robin&#39;s site">
+<meta property="og:description" content="Chapter9 Collections9.1 The Java Collections FrameworkJava最初只提供了很少但最有用的一系列数据结构：Vector, Stack, Hashtable, BitSet, Enumeration （Interfaces） Java1.2，设计者认为是时候推出full-fledged的数据结构，不像C++的STL那么复杂但又要想STL一样gene">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200531203647362.png">
+<meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200531204238496.png">
+<meta property="article:published_time" content="2020-05-31T08:52:25.000Z">
+<meta property="article:modified_time" content="2020-05-31T13:09:20.842Z">
+<meta property="article:author" content="Robin">
+<meta property="article:tag" content="Core Java">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200531203647362.png">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Robin&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Robin&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Welcome~
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Robin" target="_blank" href="//roooooobin.github.io/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/Roooooobin">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/robinlid">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                        <a title="395409947"  ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Core-Java-Chapter9" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Core Java Chapter9
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/Notes/">Notes</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-05-31
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="Chapter9-Collections"><a href="#Chapter9-Collections" class="headerlink" title="Chapter9 Collections"></a>Chapter9 Collections</h1><h2 id="9-1-The-Java-Collections-Framework"><a href="#9-1-The-Java-Collections-Framework" class="headerlink" title="9.1 The Java Collections Framework"></a>9.1 The Java Collections Framework</h2><p>Java最初只提供了很少但最有用的一系列数据结构：<code>Vector, Stack, Hashtable, BitSet, Enumeration</code> （Interfaces）</p>
+<p>Java1.2，设计者认为是时候推出<strong>full-fledged</strong>的数据结构，不像C++的STL那么复杂但又要想STL一样<strong>generic</strong></p>
+<h3 id="9-1-1-Separating-Collection-Interfaces-and-Implementation"><a href="#9-1-1-Separating-Collection-Interfaces-and-Implementation" class="headerlink" title="9.1.1 Separating Collection Interfaces and Implementation"></a>9.1.1 Separating Collection Interfaces and Implementation</h3><h4 id="1-queue"><a href="#1-queue" class="headerlink" title="1. queue"></a>1. queue</h4><p>FIFO：先进先出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Queue</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(E element)</span></span>;   <span class="comment">// add at the tail</span></span><br><span class="line">	<span class="function">E <span class="title">remove</span><span class="params">()</span></span>;   <span class="comment">// remove at the head</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两种实现：</p>
+<ul>
+<li>循环数组</li>
+<li>链表（LinkedList）</li>
+</ul>
+<blockquote>
+<p>You don’t need to know which implementation is actually used. Therefore, it makes sense to use the concrete class only when you construct the collection object. Use the interface type to hold the collection reference.</p>
+<p>Queue<Customer> staff = new LinkedList&lt;&gt;();</Customer></p>
+</blockquote>
+<p>循环数组一般来说会稍微更有效，但循环数组是一个有界限的集合——有限的容量，所以当不确定队列的具体上限时，推荐使用链表</p>
+<p>还有一些命名以Abstract开头的集合，是为了library implementers更好的实现自己的集合类</p>
+<h3 id="9-1-2-The-Collection-Interface"><a href="#9-1-2-The-Collection-Interface" class="headerlink" title="9.1.2 The Collection Interface"></a>9.1.2 The Collection Interface</h3><p>最基本的接口是Collection，有两个基本方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E element)</span></span>;   <span class="comment">// return true if the collection actually changes</span></span><br><span class="line">    <span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-1-3-Iterators"><a href="#9-1-3-Iterators" class="headerlink" title="9.1.3 Iterators"></a>9.1.3 Iterators</h3><p>四个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function">E <span class="title">next</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">forEachRemaining</span><span class="params">(... action)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>reach the end, <code>next()</code> throws a NoSuchElementException</p>
+<p>call <code>hasNext()</code> before <code>next()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Collection&lt;String&gt; c = ...</span><br><span class="line">Iterator&lt;String&gt; iter = c.iterator();</span><br><span class="line"><span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">    String element = iter.next();</span><br><span class="line">    <span class="comment">// do something with element</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// "for each" loop</span></span><br><span class="line"><span class="keyword">for</span> (String element : c) &#123;</span><br><span class="line">    <span class="comment">// do something with element</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译器会将”for each”循环用iterator翻译为一个普通的循环，所有实现了Iterable接口的都能使用”for each”循环</p>
+<p>还可以调用<code>forEachRemaining()</code> + 匿名函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iterator.forEachRemaining(element -&gt; <span class="keyword">do</span> something with element)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Instead, think of Java iterators as being <em>between elements</em>. When you call next, the iterator <em>jumps over</em> the next element, and it returns a reference to the element that it just passed</strong></p>
+</blockquote>
+<p><img src="/2020/05/31/Core-Java-Chapter9/image-20200531203647362.png" alt="image-20200531203647362"></p>
+<blockquote>
+<p>**The remove method of the Iterator interface removes the element that was returned by the last call to next. In many situations, that makes sense—you need to see the element before you can decide that it is the one that should be removed.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// how to remove the first element</span></span><br><span class="line">Iterator&lt;String&gt; iter = c.iterator();</span><br><span class="line">iter.next();	<span class="comment">// skip over the first element</span></span><br><span class="line">iter.remove();	<span class="comment">// now remove it</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能在不调用next()的情况下连续使用remove()</span></span><br><span class="line">iter.remove();</span><br><span class="line">iter.remove();	<span class="comment">// ERROR</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="9-1-4-Generic-Utility-Methods"><a href="#9-1-4-Generic-Utility-Methods" class="headerlink" title="9.1.4 Generic Utility Methods"></a>9.1.4 Generic Utility Methods</h3><p>Collection和Iterator都被称为generic, 意味着你能用该方法去操作任意一个collection</p>
+<p><img src="/2020/05/31/Core-Java-Chapter9/image-20200531204238496.png" alt="image-20200531204238496"></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年05月31日 21:09</p>
+        <p>原始链接： <a class="post-url" href="/2020/05/31/Core-Java-Chapter9/" title="Core Java Chapter9">http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/</a></p>
+        <footer>
+            <a href="http://Roooooobin.github.io">
+                <img src="/images/logo.png" alt="Robin">
+                Robin
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我吃糖~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.jpg" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.jpg">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+            <label class="reward-select-item" data-id="alipay" data-alipay="/images/alipay_code.jpg">
+                <img class="reward-select-item-alipay" src="/images/alipay.png" alt="支付宝">
+            </label>
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/&title=《Core Java Chapter9》 — Robin's site&pic=images/CoreJava.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/&title=《Core Java Chapter9》 — Robin's site&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Core Java Chapter9》 — Robin's site&url=http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/&via=http://Roooooobin.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/CoreJava/" class="color5">Core Java</a>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chapter9-Collections"><span class="post-toc-text">Chapter9 Collections</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-1-The-Java-Collections-Framework"><span class="post-toc-text">9.1 The Java Collections Framework</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-1-Separating-Collection-Interfaces-and-Implementation"><span class="post-toc-text">9.1.1 Separating Collection Interfaces and Implementation</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-queue"><span class="post-toc-text">1. queue</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-2-The-Collection-Interface"><span class="post-toc-text">9.1.2 The Collection Interface</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-3-Iterators"><span class="post-toc-text">9.1.3 Iterators</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-4-Generic-Utility-Methods"><span class="post-toc-text">9.1.4 Generic Utility Methods</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/30/Wordpress%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Wordpress网站搭建</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Robin<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://Roooooobin.github.io",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Notes/">Notes</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

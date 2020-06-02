@@ -20,8 +20,11 @@
 <meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200601105714901.png">
 <meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200601110826853.png">
 <meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200601112127026.png">
+<meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200601205226176.png">
+<meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200602182908596.png">
+<meta property="og:image" content="http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/image-20200602190630824.png">
 <meta property="article:published_time" content="2020-05-31T08:52:25.000Z">
-<meta property="article:modified_time" content="2020-06-01T08:22:09.069Z">
+<meta property="article:modified_time" content="2020-06-02T11:15:33.668Z">
 <meta property="article:author" content="Robin">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Core Java">
@@ -235,12 +238,78 @@
 <p>一般用于作为队列的底层数据结构</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;T&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br></pre></td></tr></table></figure>
 
+<h3 id="9-3-2-Array-Lists"><a href="#9-3-2-Array-Lists" class="headerlink" title="9.3.2 Array Lists"></a>9.3.2 Array Lists</h3><p>An ArrayList encapsulates a dynamically reallocated array of objects</p>
+<p>为什么不用Vector</p>
+<blockquote>
+<p>All methods of the Vector class are <strong>synchronized</strong></p>
+</blockquote>
+<h3 id="9-3-3-Hash-Sets"><a href="#9-3-3-Hash-Sets" class="headerlink" title="9.3.3 Hash Sets"></a>9.3.3 Hash Sets</h3><p>哈希表, 对每个对象计算一个哈希值, 放入相应的”桶”中, 所以自定义类时, 要实现相应的<code>hashCode</code>方法</p>
+<p>Java中哈希表的底层实现是链表数组, 每个链表称为一个桶</p>
+<p>从Java8开始, <strong>当一个链表中元素达到一个阈值(默认8)时将会转为红黑树</strong></p>
+<p>一般设置桶个数为75% - 150%的预期元素个数, 标准桶的个数应该是2的幂次, 默认是16</p>
+<p>当桶装满时, 就需要重新计算哈希(rehash), 设置承载因子:</p>
+<blockquote>
+<p>The load factor determines when a hash table is rehashed. For example, if the load factor is 0.75 (which is the default) and the table is more than 75% full, it is automatically rehashed with twice as many buckets.</p>
+</blockquote>
+<p><img src="/2020/05/31/Core-Java-Chapter9/image-20200601205226176.png" alt="image-20200601205226176"></p>
+<h3 id="9-3-4-Tree-Sets"><a href="#9-3-4-Tree-Sets" class="headerlink" title="9.3.4 Tree Sets"></a>9.3.4 Tree Sets</h3><p>sorted collection</p>
+<p>加入时任意顺序, 但是访问时是按照一定的排序规则排序好的</p>
+<p>目前的底层实现是红黑树</p>
+<p>使用tree set时, 对象一定要实现了Comparable接口, 或者为set提供一个Comparator</p>
+<h3 id="9-3-5-Queues-and-Deques"><a href="#9-3-5-Queues-and-Deques" class="headerlink" title="9.3.5 Queues and Deques"></a>9.3.5 Queues and Deques</h3><p>对于Queue, 添加删除以及查看队首都有两个方法, 区别在于出现问题时抛出异常或是返回false/null</p>
+<p><code>add offer</code> 队列满时<code>add</code>抛出IllegalStateException, <code>offer</code>返回false</p>
+<p><code>remove poll</code> 队列空时<code>remove</code>抛出NoSuchElementException, <code>poll</code>返回null</p>
+<p><code>element peek</code> 队列空时<code>element</code>抛出NoSuchElementException, <code>peek</code>返回null</p>
+<h3 id="9-3-6-Priority-Queues"><a href="#9-3-6-Priority-Queues" class="headerlink" title="9.3.6 Priority Queues"></a>9.3.6 Priority Queues</h3><p>每次取队首时, 得到的是按照一定规则排序的第一个(比如降序排列, 队首就是最大值)</p>
+<p>但是本身并不是完全顺序的, <strong>底层实现是堆</strong></p>
+<p>同样需要对象实现Comparable或者提供Comparator</p>
+<h2 id="9-4-Maps"><a href="#9-4-Maps" class="headerlink" title="9.4 Maps"></a>9.4 Maps</h2><h3 id="9-4-1-Basic-Map-Operations"><a href="#9-4-1-Basic-Map-Operations" class="headerlink" title="9.4.1 Basic Map Operations"></a>9.4.1 Basic Map Operations</h3><p>HashMap和TreeMap, 与set类似, HashMap没有顺序, TreeMap有顺序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">map.put(<span class="string">"Robin"</span>, <span class="number">22</span>);</span><br><span class="line">String name = <span class="string">""</span>;</span><br><span class="line"><span class="keyword">int</span> age = map.get(<span class="string">"Robin"</span>);</span><br><span class="line"><span class="keyword">int</span> age2 = map.getOrDefault(name, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
 
+<p>键值必须唯一, 对相同键重复赋值会覆盖, 同时返回了前一个值</p>
+<ul>
+<li><p>remove() 删除给定键的元素</p>
+</li>
+<li><p>size() 返回个数</p>
+</li>
+<li><p>forEach() 配合匿名函数做相应处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scores.forEach((k, v) -&gt; System.out.println(<span class="string">"key="</span> + k + <span class="string">"value="</span> + v));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>putAll() 将另一个map的entries全部加入到当前map</p>
+</li>
+<li><p>containsKey()</p>
+</li>
+<li><p>containsValue()</p>
+</li>
+</ul>
+<h3 id="9-4-2-Updating-Map-Entries"><a href="#9-4-2-Updating-Map-Entries" class="headerlink" title="9.4.2 Updating Map Entries"></a>9.4.2 Updating Map Entries</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">counts.put(word, counts.get(word) + <span class="number">1</span>);   <span class="comment">// 键不存在时get会返回null</span></span><br><span class="line"></span><br><span class="line">counts.put(word, counts.getOrDefault(word, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">counts.putIfAbsent(word, <span class="number">0</span>);</span><br><span class="line">counts.put(word, counts.get(word) + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">counts.merge(word, <span class="number">1</span>, Integer::sum);</span><br></pre></td></tr></table></figure>
 
-<h3 id="9-3-2-Array-Lists"><a href="#9-3-2-Array-Lists" class="headerlink" title="9.3.2 Array Lists"></a>9.3.2 Array Lists</h3>
+<h3 id="9-4-3-Map-Views"><a href="#9-4-3-Map-Views" class="headerlink" title="9.4.3 Map Views"></a>9.4.3 Map Views</h3><h4 id="keySet"><a href="#keySet" class="headerlink" title="keySet()"></a>keySet()</h4><p>不是HashSet或TreeSet, 而是一个实现了Set接口的另一个类, 可以当做一般的Collection</p>
+<p><code>values()</code></p>
+<p><code>entrySet()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;String, Employee&gt; entry : staff.entrySet())</span><br><span class="line">&#123;</span><br><span class="line">    String k = entry.getKey();</span><br><span class="line">    Employee v = entry.getValue();</span><br><span class="line">    <span class="comment">// do something with k, v</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在keySet view中<code>remove</code>相当于删除了map的一个项, 但是无法添加</p>
+<h3 id="9-4-4-Weak-Hash-Maps"><a href="#9-4-4-Weak-Hash-Maps" class="headerlink" title="9.4.4 Weak Hash Maps"></a>9.4.4 Weak Hash Maps</h3><p>存在垃圾回收问题, 当map中某个值对应的键不会再被使用, 也不会被回收</p>
+<blockquote>
+<p>As long as the map object is live, all buckets in it are live and won’t be reclaimed. Thus, your program should take care to remove unused values from long-lived maps. Or, you can use a WeakHashMap instead. This data structure cooperates with the garbage collector to remove key/value pairs when the only reference to the key is the one from the hash table entry.</p>
+</blockquote>
+<p>WeakHashMap内部使用weak references保存键</p>
+<blockquote>
+<p>However, if the object is reachable only by a WeakReference, the garbage collector still reclaims the object, but places the weak reference that led to it into a queue. The operations of the WeakHashMap periodically check that queue for newly arrived weak references. The arrival of a weak reference in the queue signifies that the key was no longer used by anyone and has been collected. The WeakHashMap<br>then removes the associated entry.</p>
+</blockquote>
+<p>对于一般不再被引用的对象, 垃圾收集器直接回收, 对于weak reference, 同样回收, 但也会放入一个队列中, 然后map去移除相应的项</p>
+<h3 id="9-4-5-Linked-Hash-Sets-and-Maps"><a href="#9-4-5-Linked-Hash-Sets-and-Maps" class="headerlink" title="9.4.5 Linked Hash Sets and Maps"></a>9.4.5 Linked Hash Sets and Maps</h3><p><img src="/2020/05/31/Core-Java-Chapter9/image-20200602182908596.png" alt="image-20200602182908596"></p>
+<p>记录了加入的顺序, 可用于实现LRU </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lru = <span class="keyword">new</span> LinkedHashMap&lt;K, V&gt;(<span class="number">128</span>, <span class="number">0.75F</span>, <span class="keyword">true</span>)&#123;</span><br><span class="line">		<span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;K, V&gt; eldest)</span></span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> size() &gt; <span class="number">100</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-4-6-Enumeration-Sets-and-Maps"><a href="#9-4-6-Enumeration-Sets-and-Maps" class="headerlink" title="9.4.6 Enumeration Sets and Maps"></a>9.4.6 Enumeration Sets and Maps</h3><p><img src="/2020/05/31/Core-Java-Chapter9/image-20200602190630824.png" alt="image-20200602190630824"></p>
+<h3 id="9-4-7-Identity-Hash-Maps"><a href="#9-4-7-Identity-Hash-Maps" class="headerlink" title="9.4.7 Identity Hash Maps"></a>9.4.7 Identity Hash Maps</h3><p>键不是由<code>hashCode</code>算出而是<code>System.identityHashCode</code></p>
+<p>相同键对象尽管内容相同也被认为是不同的</p>
+
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月01日 16:22</p>
+        <p>最后更新： 2020年06月02日 19:15</p>
         <p>原始链接： <a class="post-url" href="/2020/05/31/Core-Java-Chapter9/" title="Core Java Chapter9">http://roooooobin.github.io/2020/05/31/Core-Java-Chapter9/</a></p>
         <footer>
             <a href="http://Roooooobin.github.io">
@@ -365,7 +434,7 @@ conf: 'prod_94d118afbe3ae19b5a2ee255feaba665'
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chapter9-Collections"><span class="post-toc-text">Chapter9 Collections</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-1-The-Java-Collections-Framework"><span class="post-toc-text">9.1 The Java Collections Framework</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-1-Separating-Collection-Interfaces-and-Implementation"><span class="post-toc-text">9.1.1 Separating Collection Interfaces and Implementation</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-queue"><span class="post-toc-text">1. queue</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-2-The-Collection-Interface"><span class="post-toc-text">9.1.2 The Collection Interface</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-3-Iterators"><span class="post-toc-text">9.1.3 Iterators</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-4-Generic-Utility-Methods"><span class="post-toc-text">9.1.4 Generic Utility Methods</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-2-Interfaces-in-the-Collections-Framework"><span class="post-toc-text">9.2  Interfaces in the Collections Framework</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-3-Concrete-Collections"><span class="post-toc-text">9.3 Concrete Collections</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-1-Linked-Lists"><span class="post-toc-text">9.3.1 Linked Lists</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-2-Array-Lists"><span class="post-toc-text">9.3.2 Array Lists</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Chapter9-Collections"><span class="post-toc-text">Chapter9 Collections</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-1-The-Java-Collections-Framework"><span class="post-toc-text">9.1 The Java Collections Framework</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-1-Separating-Collection-Interfaces-and-Implementation"><span class="post-toc-text">9.1.1 Separating Collection Interfaces and Implementation</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-queue"><span class="post-toc-text">1. queue</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-2-The-Collection-Interface"><span class="post-toc-text">9.1.2 The Collection Interface</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-3-Iterators"><span class="post-toc-text">9.1.3 Iterators</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-1-4-Generic-Utility-Methods"><span class="post-toc-text">9.1.4 Generic Utility Methods</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-2-Interfaces-in-the-Collections-Framework"><span class="post-toc-text">9.2  Interfaces in the Collections Framework</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-3-Concrete-Collections"><span class="post-toc-text">9.3 Concrete Collections</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-1-Linked-Lists"><span class="post-toc-text">9.3.1 Linked Lists</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-2-Array-Lists"><span class="post-toc-text">9.3.2 Array Lists</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-3-Hash-Sets"><span class="post-toc-text">9.3.3 Hash Sets</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-4-Tree-Sets"><span class="post-toc-text">9.3.4 Tree Sets</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-5-Queues-and-Deques"><span class="post-toc-text">9.3.5 Queues and Deques</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-3-6-Priority-Queues"><span class="post-toc-text">9.3.6 Priority Queues</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-4-Maps"><span class="post-toc-text">9.4 Maps</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-4-1-Basic-Map-Operations"><span class="post-toc-text">9.4.1 Basic Map Operations</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-4-2-Updating-Map-Entries"><span class="post-toc-text">9.4.2 Updating Map Entries</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-4-3-Map-Views"><span class="post-toc-text">9.4.3 Map Views</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#keySet"><span class="post-toc-text">keySet()</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-4-4-Weak-Hash-Maps"><span class="post-toc-text">9.4.4 Weak Hash Maps</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-4-5-Linked-Hash-Sets-and-Maps"><span class="post-toc-text">9.4.5 Linked Hash Sets and Maps</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-4-6-Enumeration-Sets-and-Maps"><span class="post-toc-text">9.4.6 Enumeration Sets and Maps</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-4-7-Identity-Hash-Maps"><span class="post-toc-text">9.4.7 Identity Hash Maps</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
     

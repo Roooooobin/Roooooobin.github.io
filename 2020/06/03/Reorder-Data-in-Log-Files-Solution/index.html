@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Reorder Data in Log Files Solution | Robin&#39;s site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Robin,Robin's Blog" />
+  
+  <meta name="description" content="Leetcode937 Reorder Data in Log Files原文地址  有一系列logs, 每条log由以空格分开的若干单词组成, 第一个单词为标识符, 后面的为正文, 通过正文可以将log分为两类, 字母log和数字log 要求排序, 字母log必须在数字log前, 字母log间按照log正文的字典序排序, 如果正文相同则按标识符排序, 数字log直接保持原序  题目已经很明显的告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reorder Data in Log Files Solution">
+<meta property="og:url" content="http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/index.html">
+<meta property="og:site_name" content="Robin&#39;s site">
+<meta property="og:description" content="Leetcode937 Reorder Data in Log Files原文地址  有一系列logs, 每条log由以空格分开的若干单词组成, 第一个单词为标识符, 后面的为正文, 通过正文可以将log分为两类, 字母log和数字log 要求排序, 字母log必须在数字log前, 字母log间按照log正文的字典序排序, 如果正文相同则按标识符排序, 数字log直接保持原序  题目已经很明显的告">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-03T02:01:01.000Z">
+<meta property="article:modified_time" content="2020-06-03T02:27:47.764Z">
+<meta property="article:author" content="Robin">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="OA">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Robin&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Robin&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Welcome~
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Robin" target="_blank" href="//roooooobin.github.io/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/Roooooobin">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/robinlid">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                        <a title="395409947"  ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Reorder-Data-in-Log-Files-Solution" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Reorder Data in Log Files Solution
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/ProgrammingProblem/">Programming Problem</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-06-03
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="Leetcode937-Reorder-Data-in-Log-Files"><a href="#Leetcode937-Reorder-Data-in-Log-Files" class="headerlink" title="Leetcode937 Reorder Data in Log Files"></a>Leetcode937 Reorder Data in Log Files</h1><p><a href="https://leetcode.com/problems/reorder-data-in-log-files/" target="_blank" rel="noopener">原文地址</a></p>
+<blockquote>
+<p>有一系列logs, 每条log由以空格分开的若干单词组成, 第一个单词为标识符, 后面的为正文, 通过正文可以将log分为两类, 字母log和数字log</p>
+<p>要求排序, 字母log必须在数字log前, 字母log间按照log正文的字典序排序, 如果正文相同则按标识符排序, 数字log直接保持原序</p>
+</blockquote>
+<p>题目已经很明显的告诉我们这是一个自定义排序题了</p>
+<p>下面有三个实现方法, 其中两个使用了<strong>lambda匿名函数</strong>, 还有一个实现了<strong>自定义Comparator</strong></p>
+<h2 id="解法一-lambda-空格分离"><a href="#解法一-lambda-空格分离" class="headerlink" title="解法一 lambda+空格分离"></a>解法一 lambda+空格分离</h2><p>使用lambda匿名函数, 但是分解标识符和正文的方法比较愚蠢, 方法是找到第一个空格从而分开</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] reorderLogFiles(String[] logs) &#123;</span><br><span class="line">    Arrays.sort(logs, (log1, log2) -&gt; &#123;</span><br><span class="line">        <span class="keyword">int</span> idxOfFirstChar1 = log1.indexOf(<span class="string">' '</span>) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> idxOfFirstChar2 = log2.indexOf(<span class="string">' '</span>) + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">boolean</span> isDigit1 = Character.isDigit(log1.charAt(idxOfFirstChar1));</span><br><span class="line">        <span class="keyword">boolean</span> isDigit2 = Character.isDigit(log2.charAt(idxOfFirstChar2));</span><br><span class="line">        <span class="comment">// 字母log按照字典序排序</span></span><br><span class="line">        <span class="keyword">if</span> (!isDigit1 &amp;&amp; !isDigit2) &#123;</span><br><span class="line">            String log1WithoutId = log1.substring(idxOfFirstChar1);</span><br><span class="line">            String log2WithoutId = log2.substring(idxOfFirstChar2);</span><br><span class="line">            <span class="keyword">int</span> cmp = log1WithoutId.compareTo(log2WithoutId);</span><br><span class="line">            <span class="keyword">if</span> (cmp != <span class="number">0</span>) <span class="keyword">return</span> cmp;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> log1.substring(<span class="number">0</span>, idxOfFirstChar1-<span class="number">1</span>).compareTo(log2.substring(<span class="number">0</span>, idxOfFirstChar2-<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 字母log一定在数字log前面</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> isDigit1 ? (isDigit2 ? <span class="number">0</span>: <span class="number">1</span>) : -<span class="number">1</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> logs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解法二-lambda-split"><a href="#解法二-lambda-split" class="headerlink" title="解法二 lambda+split"></a>解法二 lambda+split</h2><p>可以使用<code>split</code>方法配合<code>limit</code>参数分解正文和标识符</p>
+<p><code>split(regex, limit)</code>表示对regex模式仅匹配limit-1次, 也即最终得到的数组长度最多为limit</p>
+<p>比如本题标识符和正文之间由1个空格分开, 那么使用<code>split(&quot; &quot;, 2)</code>表示仅匹配空格1次, 分离成包含两个元素的数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] reorderLogFiles(String[] logs) &#123;</span><br><span class="line">    Arrays.sort(logs, (log1, log2) -&gt; &#123;</span><br><span class="line">        String[] split1 = log1.split(<span class="string">" "</span>, <span class="number">2</span>);</span><br><span class="line">        String[] split2 = log2.split(<span class="string">" "</span>, <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">boolean</span> isDigit1 = Character.isDigit(split1[<span class="number">1</span>].charAt(<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">boolean</span> isDigit2 = Character.isDigit(split2[<span class="number">1</span>].charAt(<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">if</span> (!isDigit1 &amp;&amp; !isDigit2) &#123;</span><br><span class="line">            <span class="keyword">int</span> cmp = split1[<span class="number">1</span>].compareTo(split2[<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (cmp != <span class="number">0</span>) <span class="keyword">return</span> cmp;</span><br><span class="line">            <span class="keyword">return</span> split1[<span class="number">0</span>].compareTo(split2[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isDigit1 ? (isDigit2 ? <span class="number">0</span> : <span class="number">1</span>) : -<span class="number">1</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> logs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解法三-自定义Comparator"><a href="#解法三-自定义Comparator" class="headerlink" title="解法三 自定义Comparator"></a>解法三 自定义Comparator</h2><p>创建一个新的Comparator并且重写compare方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String[] reorderLogFiles(String[] logs) &#123;</span><br><span class="line">    Comparator&lt;String&gt; myComparator = <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String log1, String log2)</span> </span>&#123;</span><br><span class="line">            String[] split1 = log1.split(<span class="string">" "</span>, <span class="number">2</span>);</span><br><span class="line">            String[] split2 = log2.split(<span class="string">" "</span>, <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">boolean</span> isDigit1 = Character.isDigit(split1[<span class="number">1</span>].charAt(<span class="number">0</span>));</span><br><span class="line">            <span class="keyword">boolean</span> isDigit2 = Character.isDigit(split2[<span class="number">1</span>].charAt(<span class="number">0</span>));</span><br><span class="line">            <span class="keyword">if</span> (!isDigit1 &amp;&amp; !isDigit2) &#123;</span><br><span class="line">                <span class="keyword">int</span> cmp = split1[<span class="number">1</span>].compareTo(split2[<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span> (cmp != <span class="number">0</span>) <span class="keyword">return</span> cmp;</span><br><span class="line">                <span class="keyword">return</span> split1[<span class="number">0</span>].compareTo(split2[<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> isDigit1 ? (isDigit2 ? <span class="number">0</span> : <span class="number">1</span>) : -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    Arrays.sort(logs, myComparator);</span><br><span class="line">    <span class="keyword">return</span> logs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Key-Points"><a href="#Key-Points" class="headerlink" title="Key Points"></a>Key Points</h2><ul>
+<li>熟悉lambda语法<code>() -&gt; {}</code></li>
+<li>split用法, limit参数的含义</li>
+<li>compareTo方法返回的是0/1/-1, 所以不能直接放入判断语句(与c++不同)</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年06月03日 10:27</p>
+        <p>原始链接： <a class="post-url" href="/2020/06/03/Reorder-Data-in-Log-Files-Solution/" title="Reorder Data in Log Files Solution">http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/</a></p>
+        <footer>
+            <a href="http://Roooooobin.github.io">
+                <img src="/images/logo.png" alt="Robin">
+                Robin
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        thanks~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.png" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.png">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/&title=《Reorder Data in Log Files Solution》 — Robin's site&pic=http://Roooooobin.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/&title=《Reorder Data in Log Files Solution》 — Robin's site&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Reorder Data in Log Files Solution》 — Robin's site&url=http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/&via=http://Roooooobin.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/06/03/Reorder-Data-in-Log-Files-Solution/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/OA/" class="color3">OA</a>
+      
+    <a href="/tags/Leetcode/" class="color4">Leetcode</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+	<!--高速版-->
+<div id="SOHUCS" ></div>
+<script charset="utf-8" type="text/javascript" src="http://cy-cdn.kuaizhan.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+appid: 'cyuRJ7IjH',
+conf: 'prod_94d118afbe3ae19b5a2ee255feaba665'
+});
+</script>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode937-Reorder-Data-in-Log-Files"><span class="post-toc-text">Leetcode937 Reorder Data in Log Files</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解法一-lambda-空格分离"><span class="post-toc-text">解法一 lambda+空格分离</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解法二-lambda-split"><span class="post-toc-text">解法二 lambda+split</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解法三-自定义Comparator"><span class="post-toc-text">解法三 自定义Comparator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Key-Points"><span class="post-toc-text">Key Points</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/03/Amazon-OA-Questions/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Amazon OA Questions</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Robin<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://Roooooobin.github.io",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Interview/">Interview</a><a class="category-link" href="/categories/Notes/">Notes</a><a class="category-link" href="/categories/Programming-Problem/">Programming Problem</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Amazon/" style="font-size: 10px;">Amazon</a> <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/OA/" style="font-size: 15px;">OA</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Amazon/" style="font-size: 10px;">Amazon</a> <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/OA/" style="font-size: 15px;">OA</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

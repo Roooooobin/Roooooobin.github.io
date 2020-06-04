@@ -2283,7 +2283,7 @@ pre .javascript .function {
   bottom: 0;
   left: 0;
   width: 100%;
-  overflow: hidden;
+  overflow: scroll;
   background: rgba(0,0,0,0.17);
 }
 .sidebar-menu-box .sidebar-menu-box-container {
@@ -2488,7 +2488,7 @@ pre .javascript .function {
 }
 .post-title {
   text-align: center;
-  font-size: 26px;
+  font-size: 40px;
   color: #555;
 }
 .post-title-bar {

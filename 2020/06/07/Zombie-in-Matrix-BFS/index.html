@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Zombie in Matrix(BFS) | Robin&#39;s site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Robin,Robin's Blog" />
+  
+  <meta name="description" content="Zombie in Matrix(BFS)原文地址  给定一个二维矩阵， 值为1表示僵尸，0表示人类，每个僵尸每小时可以感染上下左右相邻的人类，求问多少小时后所有人类都被感染  非常标准的BFS题，一般的题面都是某一些特殊的元素（比如本题的僵尸）可以对相邻的（比如上下左右或九宫格）元素进行一定的操作（比如本题的所谓的感染）。 解题思路也很明确，数据结构使用队列  初始化。将最开始的所有特殊元素加入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zombie in Matrix(BFS)">
+<meta property="og:url" content="http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/index.html">
+<meta property="og:site_name" content="Robin&#39;s site">
+<meta property="og:description" content="Zombie in Matrix(BFS)原文地址  给定一个二维矩阵， 值为1表示僵尸，0表示人类，每个僵尸每小时可以感染上下左右相邻的人类，求问多少小时后所有人类都被感染  非常标准的BFS题，一般的题面都是某一些特殊的元素（比如本题的僵尸）可以对相邻的（比如上下左右或九宫格）元素进行一定的操作（比如本题的所谓的感染）。 解题思路也很明确，数据结构使用队列  初始化。将最开始的所有特殊元素加入">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-07T13:11:24.000Z">
+<meta property="article:modified_time" content="2020-06-07T13:53:19.301Z">
+<meta property="article:author" content="Robin">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Amazon">
+<meta property="article:tag" content="OA">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Robin&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Robin&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Welcome~
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Robin" target="_blank" href="//roooooobin.github.io/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/Roooooobin">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/robinlid">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                        <a title="395409947"  ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Zombie-in-Matrix-BFS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Zombie in Matrix(BFS)
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/ProgrammingProblem/">Programming Problem</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-06-07
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="Zombie-in-Matrix-BFS"><a href="#Zombie-in-Matrix-BFS" class="headerlink" title="Zombie in Matrix(BFS)"></a>Zombie in Matrix(BFS)</h1><p><a href="https://leetcode.com/discuss/interview-question/411357/" target="_blank" rel="noopener">原文地址</a></p>
+<blockquote>
+<p>给定一个二维矩阵， 值为1表示僵尸，0表示人类，每个僵尸每小时可以感染上下左右相邻的人类，求问多少小时后所有人类都被感染</p>
+</blockquote>
+<p>非常标准的BFS题，一般的题面都是<strong>某一些特殊的元素</strong>（比如本题的僵尸）可以对<strong>相邻的</strong>（比如上下左右或九宫格）元素<strong>进行一定的操作</strong>（比如本题的所谓的感染）。</p>
+<p>解题思路也很明确，数据结构使用队列</p>
+<ol>
+<li><p>初始化。将最开始的所有特殊元素加入到队列中。</p>
+</li>
+<li><p>扩展队列。题目一般要求记录多少步完成“任务”，所以每一批扩展的元素不能混在一起加入队列。首先记录每一步扩展的个数，也即在扩展前队列的<code>queue.size()</code>，每一次扩展仅访问这么多的元素。</p>
+<p>取出队首并队首出队，找到该元素的所有满足题意的相邻元素（满足题意一般是1.没有越界 2.满足一定条件（比如本题的只有人才会被感染）），将这些元素入队，<strong>并且记录他们，以免重复访问</strong></p>
+</li>
+<li><p>返回结果。当队列为空时表示无法扩展，那么如果已经完成题目要求的“任务”则返回步数，否则返回无法完成的标识（一般是<code>-1</code>）</p>
+</li>
+</ol>
+<h3 id="本题代码："><a href="#本题代码：" class="headerlink" title="本题代码："></a>本题代码：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">minHours</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; grid)</span> </span>&#123;</span><br><span class="line">    Queue&lt;<span class="keyword">int</span>[]&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> rows = grid.size();</span><br><span class="line">    <span class="keyword">if</span> (rows == <span class="number">0</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> columns = grid.get(<span class="number">0</span>).size();</span><br><span class="line">    <span class="keyword">if</span> (columns == <span class="number">0</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;rows; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;columns; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (grid.get(i).get(j) == <span class="number">1</span>) &#123;</span><br><span class="line">                queue.offer(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, j&#125;);</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[][] directions = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;-<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, -<span class="number">1</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> target = rows * columns;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = queue.size();</span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (count == target) <span class="keyword">return</span> min;</span><br><span class="line">        <span class="keyword">while</span> (len &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            len--;</span><br><span class="line">            <span class="keyword">int</span>[] cur = queue.poll();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span>[] direction : directions) &#123;</span><br><span class="line">                <span class="keyword">int</span>[] next = &#123;cur[<span class="number">0</span>] + direction[<span class="number">0</span>], cur[<span class="number">1</span>] + direction[<span class="number">1</span>]&#125;;</span><br><span class="line">                <span class="keyword">int</span> x = next[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">int</span> y = next[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt; rows &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; columns &amp;&amp; grid.get(x).get(y) == <span class="number">0</span>) &#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    grid.get(x).set(y, <span class="number">1</span>);</span><br><span class="line">                    queue.offer(next);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        min++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面继续介绍两个典型的BFS题</p>
+<h1 id="Leetcode994-Rotting-Oranges"><a href="#Leetcode994-Rotting-Oranges" class="headerlink" title="Leetcode994 Rotting Oranges"></a>Leetcode994 Rotting Oranges</h1><p><a href="https://leetcode.com/problems/rotting-oranges/" target="_blank" rel="noopener">原文地址</a></p>
+<blockquote>
+<p>仍然是标准的BFS题，本题背景改为了腐烂的橙子，每个腐烂的橙子每分钟会让上下左右相邻的新鲜橙子腐烂，本题有个变化是存在空的单元格，但其实处理起来区别不大，只不过最后完成的任务不是所有格子都是腐烂的橙子，而是所有非空格子</p>
+</blockquote>
+<h3 id="本题代码"><a href="#本题代码" class="headerlink" title="本题代码"></a>本题代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">orangesRotting</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = grid.length;</span><br><span class="line">    <span class="keyword">int</span> m = grid[<span class="number">0</span>].length;</span><br><span class="line">    Queue&lt;<span class="keyword">int</span>[]&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> target = n * m;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (grid[i][j] == <span class="number">2</span>) &#123;</span><br><span class="line">                queue.offer(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, j&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(grid[i][j] == <span class="number">0</span>) &#123;</span><br><span class="line">                target--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (target == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> minute = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span>[][] directions = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;-<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, -<span class="number">1</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">int</span> count = queue.size();</span><br><span class="line">        target -= count;</span><br><span class="line">        <span class="keyword">if</span> (target == <span class="number">0</span>) <span class="keyword">return</span> minute;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;count; ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span>[] cur = queue.poll();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span>[] direction : directions) &#123;</span><br><span class="line">                <span class="keyword">int</span> x = cur[<span class="number">0</span>] + direction[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">int</span> y = cur[<span class="number">1</span>] + direction[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt; n &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; m &amp;&amp; grid[x][y] == <span class="number">1</span>) &#123;</span><br><span class="line">                    queue.offer(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;x, y&#125;);</span><br><span class="line">                    grid[x][y] = <span class="number">2</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        minute++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Leetcode286-Walls-and-Gates"><a href="#Leetcode286-Walls-and-Gates" class="headerlink" title="Leetcode286 Walls and Gates"></a>Leetcode286 Walls and Gates</h1><p><a href="https://www.lintcode.com/problem/walls-and-gates/description" target="_blank" rel="noopener">原文地址</a></p>
+<blockquote>
+<p>本题在Leetcode上是付费题，可以在上面的Lintcode中看到题面</p>
+<p>依然是BFS题，背景变为了求每个空房间到门的距离，与前两题不同的是，任务不是返回最后多少步，而是将每个步数填入访问的元素中</p>
+</blockquote>
+<h3 id="本题代码-1"><a href="#本题代码-1" class="headerlink" title="本题代码"></a>本题代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">wallsAndGates</span><span class="params">(<span class="keyword">int</span>[][] rooms)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = rooms.length;</span><br><span class="line">    <span class="keyword">int</span> m = rooms[<span class="number">0</span>].length;</span><br><span class="line">    Queue&lt;<span class="keyword">int</span>[]&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;m; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (rooms[i][j] == <span class="number">0</span>) &#123;</span><br><span class="line">                queue.offer(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, j&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> distance = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> INF = <span class="number">2147483647</span>;</span><br><span class="line">    <span class="keyword">int</span>[][] directions = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;-<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">0</span>, -<span class="number">1</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> cnt = queue.size();</span><br><span class="line">        <span class="keyword">if</span> (cnt == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">while</span> (cnt &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            cnt--;</span><br><span class="line">            <span class="keyword">int</span>[] cur = queue.poll();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span>[] direction : directions) &#123;</span><br><span class="line">                <span class="keyword">int</span>[] next = &#123;cur[<span class="number">0</span>] + direction[<span class="number">0</span>], cur[<span class="number">1</span>] + direction[<span class="number">1</span>]&#125;;</span><br><span class="line">                <span class="keyword">int</span> x = next[<span class="number">0</span>];</span><br><span class="line">                <span class="keyword">int</span> y = next[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt; n &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; m &amp;&amp; rooms[x][y] == INF) &#123;</span><br><span class="line">                    rooms[x][y] = distance;</span><br><span class="line">                    queue.offer(next);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        distance++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Conclusion-and-points"><a href="#Conclusion-and-points" class="headerlink" title="Conclusion and points"></a>Conclusion and points</h1><ul>
+<li>题面所要求的任务目标，可能是对矩阵本身做一些修改，比如第三题中，要将距离（扩展的步数）填入到矩阵中，或者大部分的直接返回将所有元素“覆盖”（感染、腐烂）的总步数</li>
+<li>扩展的新元素需要满足的条件，首要条件是不能越界。齐次是尚未“覆盖”的元素</li>
+<li>对于当前扩展的新元素，需要记录他们已经访问过，可以加入Set，或者直接修改其元素值当做标记</li>
+<li>其他点：取出队首同时队首要出队<code>使用poll()即可</code>；每一步扩展的元素是扩展前队列的大小；注意扩展方向是上下左右还是九宫格</li>
+</ul>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年06月07日 21:53</p>
+        <p>原始链接： <a class="post-url" href="/2020/06/07/Zombie-in-Matrix-BFS/" title="Zombie in Matrix(BFS)">http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/</a></p>
+        <footer>
+            <a href="http://Roooooobin.github.io">
+                <img src="/images/logo.png" alt="Robin">
+                Robin
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        thanks~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.png" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.png">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/&title=《Zombie in Matrix(BFS)》 — Robin's site&pic=http://Roooooobin.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/&title=《Zombie in Matrix(BFS)》 — Robin's site&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Zombie in Matrix(BFS)》 — Robin's site&url=http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/&via=http://Roooooobin.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/06/07/Zombie-in-Matrix-BFS/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/Amazon/" class="color2">Amazon</a>
+      
+    <a href="/tags/OA/" class="color3">OA</a>
+      
+    <a href="/tags/Leetcode/" class="color4">Leetcode</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+	<!--高速版-->
+<div id="SOHUCS" ></div>
+<script charset="utf-8" type="text/javascript" src="http://cy-cdn.kuaizhan.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+appid: 'cyuRJ7IjH',
+conf: 'prod_94d118afbe3ae19b5a2ee255feaba665'
+});
+</script>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Zombie-in-Matrix-BFS"><span class="post-toc-text">Zombie in Matrix(BFS)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#本题代码："><span class="post-toc-text">本题代码：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode994-Rotting-Oranges"><span class="post-toc-text">Leetcode994 Rotting Oranges</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#本题代码"><span class="post-toc-text">本题代码</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode286-Walls-and-Gates"><span class="post-toc-text">Leetcode286 Walls and Gates</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#本题代码-1"><span class="post-toc-text">本题代码</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Conclusion-and-points"><span class="post-toc-text">Conclusion and points</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/03/Reorder-Data-in-Log-Files-Solution/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Reorder Data in Log Files Solution</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Robin<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://Roooooobin.github.io",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Interview/">Interview</a><a class="category-link" href="/categories/Notes/">Notes</a><a class="category-link" href="/categories/Programming-Problem/">Programming Problem</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Amazon/" style="font-size: 16.67px;">Amazon</a> <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/OA/" style="font-size: 16.67px;">OA</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Amazon/" style="font-size: 16.67px;">Amazon</a> <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/OA/" style="font-size: 16.67px;">OA</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

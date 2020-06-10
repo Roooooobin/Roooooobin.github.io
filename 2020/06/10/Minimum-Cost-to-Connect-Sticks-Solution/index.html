@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Number of Islands Solution | Robin&#39;s site</title>
+  <title>Minimum Cost to Connect Sticks Solution | Robin&#39;s site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Robin,Robin's Blog" />
   
-  <meta name="description" content="Leetcode200 Number of Islands原文地址  给一个二维矩阵，1表示陆地，0表示水，求问有多少个岛屿，岛屿定义为被水包围的一片陆地，陆地之间上下左右连接，假定矩阵四边范围外的都是水  典型的DFS题，题目一般都会有“一片”的概念，通过某一个点以一定的范围（上下左右或九宫格）向外延伸直到无法延伸，这样就形成了一个“一片”，也即答案++，在延伸的同时将访问到的点都作标记，以免重">
+  <meta name="description" content="Leetcode1167 Minimum Cost to Connect Sticks题目地址 变式原文地址 领扣地址 本题在Leetcode上是会员题，对应Lintcode-1872  有若干长度为正整数的棍子，每连接两个棍子X和Y需要X+Y的代价，求问将所有棍子连接成一个的最小代价  因为连接两个棍子需要的代价是他们的长度和，合为一个之后又会再与其他棍子连接，相当于他们被重复计算了多次，为了减">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Number of Islands Solution">
-<meta property="og:url" content="http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/index.html">
+<meta property="og:title" content="Minimum Cost to Connect Sticks Solution">
+<meta property="og:url" content="http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/index.html">
 <meta property="og:site_name" content="Robin&#39;s site">
-<meta property="og:description" content="Leetcode200 Number of Islands原文地址  给一个二维矩阵，1表示陆地，0表示水，求问有多少个岛屿，岛屿定义为被水包围的一片陆地，陆地之间上下左右连接，假定矩阵四边范围外的都是水  典型的DFS题，题目一般都会有“一片”的概念，通过某一个点以一定的范围（上下左右或九宫格）向外延伸直到无法延伸，这样就形成了一个“一片”，也即答案++，在延伸的同时将访问到的点都作标记，以免重">
+<meta property="og:description" content="Leetcode1167 Minimum Cost to Connect Sticks题目地址 变式原文地址 领扣地址 本题在Leetcode上是会员题，对应Lintcode-1872  有若干长度为正整数的棍子，每连接两个棍子X和Y需要X+Y的代价，求问将所有棍子连接成一个的最小代价  因为连接两个棍子需要的代价是他们的长度和，合为一个之后又会再与其他棍子连接，相当于他们被重复计算了多次，为了减">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-09T13:49:24.000Z">
-<meta property="article:modified_time" content="2020-06-09T13:59:26.756Z">
+<meta property="article:published_time" content="2020-06-10T13:27:37.000Z">
+<meta property="article:modified_time" content="2020-06-10T13:40:12.449Z">
 <meta property="article:author" content="Robin">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Amazon">
-<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="Priority Queue">
 <meta name="twitter:card" content="summary">
   
   
@@ -116,14 +116,14 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-Number-of-Islands-Solution" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-Minimum-Cost-to-Connect-Sticks-Solution" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      Number of Islands Solution
+      Minimum Cost to Connect Sticks Solution
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -136,7 +136,7 @@
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2020-06-09
+          <i class="fa fa-calendar"></i>  2020-06-10
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -152,18 +152,31 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h1 id="Leetcode200-Number-of-Islands"><a href="#Leetcode200-Number-of-Islands" class="headerlink" title="Leetcode200 Number of Islands"></a>Leetcode200 Number of Islands</h1><p><a href="https://leetcode.com/problems/number-of-islands/" target="_blank" rel="noopener">原文地址</a></p>
+            <h1 id="Leetcode1167-Minimum-Cost-to-Connect-Sticks"><a href="#Leetcode1167-Minimum-Cost-to-Connect-Sticks" class="headerlink" title="Leetcode1167 Minimum Cost to Connect Sticks"></a>Leetcode1167 Minimum Cost to Connect Sticks</h1><p><a href="https://leetcode.com/problems/minimum-cost-to-connect-sticks/" target="_blank" rel="noopener">题目地址</a></p>
+<p><a href="https://leetcode.com/discuss/interview-question/344677" target="_blank" rel="noopener">变式原文地址</a></p>
+<p><a href="https://www.lintcode.com/problem/minimum-cost-to-connect-sticks/description" target="_blank" rel="noopener">领扣地址</a> 本题在Leetcode上是会员题，对应Lintcode-1872</p>
 <blockquote>
-<p>给一个二维矩阵，1表示陆地，0表示水，求问有多少个岛屿，岛屿定义为被水包围的一片陆地，陆地之间上下左右连接，假定矩阵四边范围外的都是水</p>
+<p>有若干长度为正整数的棍子，每连接两个棍子X和Y需要X+Y的代价，求问将所有棍子连接成一个的最小代价</p>
 </blockquote>
-<p>典型的DFS题，题目一般都会有“一片”的概念，通过某一个点以一定的<strong>范围（上下左右或九宫格）</strong>向外延伸直到无法延伸，这样就形成了一个“一片”，也即答案++，在延伸的同时将访问到的点都作标记，以免重复。遍历整个矩阵，答案就是这样的起始点的个数。</p>
-<h2 id="本题代码"><a href="#本题代码" class="headerlink" title="本题代码"></a>本题代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] grid, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; <span class="number">0</span> || i &gt;= grid.length || j &lt; <span class="number">0</span> || j &gt;= grid[i].length || grid[i][j] == <span class="string">'0'</span>) <span class="keyword">return</span>;</span><br><span class="line">    grid[i][j] = <span class="string">'0'</span>;</span><br><span class="line">    dfs(grid, i+<span class="number">1</span>, j);</span><br><span class="line">    dfs(grid, i-<span class="number">1</span>, j);</span><br><span class="line">    dfs(grid, i, j+<span class="number">1</span>);</span><br><span class="line">    dfs(grid, i, j-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">numIslands</span><span class="params">(<span class="keyword">char</span>[][] grid)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;grid.length; ++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;grid[i].length; ++j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(grid[i][j] == <span class="string">'1'</span>)&#123;</span><br><span class="line">                dfs(grid, i, j);</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为连接两个棍子需要的代价是他们的长度和，合为一个之后又会再与其他棍子连接，相当于他们被重复计算了多次，为了减少代价，重复的长度必须要尽量小，所以很明显，每次取最小的两个棍子。</p>
+<p>使用优先队列就迎刃而解了。</p>
+<h2 id="本题代码"><a href="#本题代码" class="headerlink" title="本题代码"></a>本题代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">MinimumCost</span><span class="params">(List&lt;Integer&gt; sticks)</span> </span>&#123;</span><br><span class="line">    PriorityQueue&lt;Integer&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;&gt;(sticks);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (pq.size() &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> top = pq.poll();</span><br><span class="line">        <span class="keyword">int</span> top2 = pq.poll();</span><br><span class="line">        ans += (top + top2);</span><br><span class="line">        pq.offer(top + top2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>C++中STL优先队列默认是大顶堆，队首是最大值</p>
+<p>C++</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 小顶堆</span></span><br><span class="line">priority_queue &lt;<span class="keyword">int</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;,greater&lt;<span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line"><span class="comment">// 大顶堆（默认）</span></span><br><span class="line">priority_queue &lt;<span class="keyword">int</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;,less&lt;<span class="keyword">int</span>&gt; &gt;q;</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; q;</span><br></pre></td></tr></table></figure>
+
+<p>Java中的优先队列默认是小顶堆，队首是最小值</p>
+<p>Java若要实现大顶堆，重写Comparator函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">11</span>;</span><br><span class="line">PriorityQueue&lt;Integer&gt; maxHeap = <span class="keyword">new</span> PriorityQueue&lt;Integer&gt;(DEFAULT_INITIAL_CAPACITY, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer o1, Integer o2)</span> </span>&#123;                </span><br><span class="line">            <span class="keyword">return</span> o2-o1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
 
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月09日 21:59</p>
-        <p>原始链接： <a class="post-url" href="/2020/06/09/Number-of-Islands-Solution/" title="Number of Islands Solution">http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/</a></p>
+        <p>最后更新： 2020年06月10日 21:40</p>
+        <p>原始链接： <a class="post-url" href="/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/" title="Minimum Cost to Connect Sticks Solution">http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/</a></p>
         <footer>
             <a href="http://Roooooobin.github.io">
                 <img src="/images/logo.png" alt="Robin">
@@ -216,7 +229,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/&title=《Number of Islands Solution》 — Robin's site&pic=images/leetcode.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/&title=《Minimum Cost to Connect Sticks Solution》 — Robin's site&pic=images/leetcode.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -226,22 +239,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/&title=《Number of Islands Solution》 — Robin's site&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/&title=《Minimum Cost to Connect Sticks Solution》 — Robin's site&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Number of Islands Solution》 — Robin's site&url=http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/&via=http://Roooooobin.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Minimum Cost to Connect Sticks Solution》 — Robin's site&url=http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/&via=http://Roooooobin.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -251,7 +264,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/06/09/Number-of-Islands-Solution/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -267,7 +280,7 @@
       
     <a href="/tags/Amazon/" class="color2">Amazon</a>
       
-    <a href="/tags/DFS/" class="color4">DFS</a>
+    <a href="/tags/PriorityQueue/" class="color5">Priority Queue</a>
       
   </li>
 
@@ -289,26 +302,16 @@ conf: 'prod_94d118afbe3ae19b5a2ee255feaba665'
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode200-Number-of-Islands"><span class="post-toc-text">Leetcode200 Number of Islands</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本题代码"><span class="post-toc-text">本题代码</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode1167-Minimum-Cost-to-Connect-Sticks"><span class="post-toc-text">Leetcode1167 Minimum Cost to Connect Sticks</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本题代码"><span class="post-toc-text">本题代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意点"><span class="post-toc-text">注意点</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          Minimum Cost to Connect Sticks Solution
-        
-      </span>
-    </a>
   
-  
-    <a href="/2020/06/08/Search-Suggestions-System-Solution/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Search Suggestions System Solution</span>
+    <a href="/2020/06/09/Number-of-Islands-Solution/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Number of Islands Solution</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   

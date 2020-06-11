@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Top K Frequently Mentioned Keywords Solution | Robin&#39;s site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Robin,Robin's Blog" />
+  
+  <meta name="description" content="Top K Frequently Mentioned Keywords原题地址  给定一些有若干单词组成的评论和一些关键词，求问最热门的K个关键词，不区分大小写，出现次数相同则按照字母顺序排序  很标准的哈希打表问题，本题一个容易忽视的点是在同一个评论中的关键词出现多次也只能算一次，这个很多原文下面的题解都没有注意到。 另外就是分开评论中各个词时，应该使用split(&quot;\\W&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Top K Frequently Mentioned Keywords Solution">
+<meta property="og:url" content="http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/index.html">
+<meta property="og:site_name" content="Robin&#39;s site">
+<meta property="og:description" content="Top K Frequently Mentioned Keywords原题地址  给定一些有若干单词组成的评论和一些关键词，求问最热门的K个关键词，不区分大小写，出现次数相同则按照字母顺序排序  很标准的哈希打表问题，本题一个容易忽视的点是在同一个评论中的关键词出现多次也只能算一次，这个很多原文下面的题解都没有注意到。 另外就是分开评论中各个词时，应该使用split(&quot;\\W&quot;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-11T13:00:32.000Z">
+<meta property="article:modified_time" content="2020-06-11T13:18:56.861Z">
+<meta property="article:author" content="Robin">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Amazon">
+<meta property="article:tag" content="Hashmap">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<script src="/js/pace.min.js"></script>
+
+  
+
+  
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Robin&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/about">
+                        <i class="fa fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Robin&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        Welcome~
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Robin" target="_blank" href="//roooooobin.github.io/">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/Roooooobin">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/robinlid">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                        <a title="395409947"  ">
+                            <i class="fa fa-qq fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-Top-K-Frequently-Mentioned-Keywords-Solution" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Top K Frequently Mentioned Keywords Solution
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+              <li>
+                  <i class="fa fa-book"></i>
+                  
+                      <a href="/categories/ProgrammingProblem/">Programming Problem</a>
+                  
+              </li>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2020-06-11
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h1 id="Top-K-Frequently-Mentioned-Keywords"><a href="#Top-K-Frequently-Mentioned-Keywords" class="headerlink" title="Top K Frequently Mentioned Keywords"></a>Top K Frequently Mentioned Keywords</h1><p><a href="https://leetcode.com/discuss/interview-question/542597/" target="_blank" rel="noopener">原题地址</a></p>
+<blockquote>
+<p>给定一些有若干单词组成的评论和一些关键词，求问最热门的K个关键词，不区分大小写，出现次数相同则按照字母顺序排序</p>
+</blockquote>
+<p>很标准的哈希打表问题，本题一个容易忽视的点是在<strong>同一个评论中的关键词出现多次也只能算一次</strong>，这个很多原文下面的题解都没有注意到。</p>
+<p>另外就是分开评论中各个词时，应该使用<code>split(&quot;\\W&quot;)</code>，因为可能出现逗号句号等非空白符。</p>
+<p>遍历每个评论的所有单词，如果关键词在其中则累积。</p>
+<p>最后放入一个大顶堆（优先队列），输出堆顶的K个值即可</p>
+<h2 id="本题代码"><a href="#本题代码" class="headerlink" title="本题代码"></a>本题代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">getTopKFrequent</span><span class="params">(<span class="keyword">int</span> k, String[] keywords, String[] reviews)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, Integer&gt; count = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (String review : reviews) &#123;</span><br><span class="line">        <span class="comment">// 因为一个review中可能出现多个单词，但是计算频率时只能算一次</span></span><br><span class="line">        Set&lt;String&gt; curWords = <span class="keyword">new</span> HashSet&lt;&gt;(Arrays.asList(review.toLowerCase().split(<span class="string">"\\W"</span>)));</span><br><span class="line">        <span class="keyword">for</span> (String word : keywords) &#123;</span><br><span class="line">            <span class="keyword">if</span> (curWords.contains(word)) &#123;</span><br><span class="line">                count.merge(word, <span class="number">1</span>, Integer::sum);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(count);</span><br><span class="line">    Queue&lt;Map.Entry&lt;String, Integer&gt;&gt; maxHeap = <span class="keyword">new</span> PriorityQueue&lt;&gt;((a, b) -&gt; a.getValue().equals(b.getValue()) ? a.getKey().compareTo(b.getKey()) : b.getValue() - a.getValue());</span><br><span class="line">    maxHeap.addAll(count.entrySet());</span><br><span class="line">    List&lt;String&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (!maxHeap.isEmpty() &amp;&amp; k-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        ans.add(maxHeap.poll().getKey());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Leetcode692-Top-K-Frequent-Words"><a href="#Leetcode692-Top-K-Frequent-Words" class="headerlink" title="Leetcode692 Top K Frequent Words"></a>Leetcode692 Top K Frequent Words</h1><p><a href="https://leetcode.com/problems/top-k-frequent-words/" target="_blank" rel="noopener">原文地址</a></p>
+<p>几乎一样，更直接</p>
+<h2 id="本题代码-1"><a href="#本题代码-1" class="headerlink" title="本题代码"></a>本题代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">topKFrequent</span><span class="params">(String[] words, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, Integer&gt; count = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (String word : words) &#123;</span><br><span class="line">        count.merge(word, <span class="number">1</span>, Integer::sum);</span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;Map.Entry&lt;String, Integer&gt;&gt; maxHeap = <span class="keyword">new</span> PriorityQueue&lt;&gt;((a, b) -&gt; a.getValue().equals(b.getValue()) ? a.getKey().compareTo(b.getKey()) : b.getValue() - a.getValue());</span><br><span class="line">    maxHeap.addAll(count.entrySet());</span><br><span class="line">    List&lt;String&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">while</span> (!maxHeap.isEmpty() &amp;&amp; k-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        ans.add(maxHeap.poll().getKey());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Leetcode347-Top-K-Frequent-Elements"><a href="#Leetcode347-Top-K-Frequent-Elements" class="headerlink" title="Leetcode347 Top K Frequent Elements"></a>Leetcode347 Top K Frequent Elements</h1><p><a href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank" rel="noopener">原文地址</a></p>
+<p>元素从字符串变为了整数，其他一样</p>
+<h2 id="本题代码-2"><a href="#本题代码-2" class="headerlink" title="本题代码"></a>本题代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] topKFrequent(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k) &#123;</span><br><span class="line">    Map&lt;Integer, Integer&gt; count = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">        count.merge(num, <span class="number">1</span>, Integer::sum);</span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;Integer&gt; heap = <span class="keyword">new</span> PriorityQueue&lt;&gt;(Comparator.comparingInt(count::get));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> n : count.keySet()) &#123;</span><br><span class="line">        heap.add(n);</span><br><span class="line">        <span class="keyword">if</span> (heap.size() &gt; k) heap.poll();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] top = <span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=k-<span class="number">1</span>; i&gt;=<span class="number">0</span>; --i) &#123;</span><br><span class="line">        top[i] = heap.poll();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2020年06月11日 21:18</p>
+        <p>原始链接： <a class="post-url" href="/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/" title="Top K Frequently Mentioned Keywords Solution">http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/</a></p>
+        <footer>
+            <a href="http://Roooooobin.github.io">
+                <img src="/images/logo.png" alt="Robin">
+                Robin
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;">赏</a>
+</div>
+
+<div id="reward" class="post-modal reward-lay">
+    <a class="close" href="javascript:;" id="reward-close">×</a>
+    <span class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        thanks~
+        <i class="icon icon-quote-right"></i>
+    </span>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/images/wechat_code.png" alt="打赏二维码">
+        </div>
+        <div class="reward-select">
+            
+            <label class="reward-select-item checked" data-id="wechat" data-wechat="/images/wechat_code.png">
+                <img class="reward-select-item-wechat" src="/images/wechat.png" alt="微信">
+            </label>
+            
+            
+        </div>
+    </div>
+</div>
+
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/&title=《Top K Frequently Mentioned Keywords Solution》 — Robin's site&pic=images/leetcode.jpg" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/&title=《Top K Frequently Mentioned Keywords Solution》 — Robin's site&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Top K Frequently Mentioned Keywords Solution》 — Robin's site&url=http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/&via=http://Roooooobin.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/06/11/Top-K-Frequently-Mentioned-Keywords-Solution/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/Java/" class="color5">Java</a>
+      
+    <a href="/tags/Amazon/" class="color2">Amazon</a>
+      
+    <a href="/tags/Hashmap/" class="color3">Hashmap</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+	<!--高速版-->
+<div id="SOHUCS" ></div>
+<script charset="utf-8" type="text/javascript" src="http://cy-cdn.kuaizhan.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+window.changyan.api.config({
+appid: 'cyuRJ7IjH',
+conf: 'prod_94d118afbe3ae19b5a2ee255feaba665'
+});
+</script>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Top-K-Frequently-Mentioned-Keywords"><span class="post-toc-text">Top K Frequently Mentioned Keywords</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本题代码"><span class="post-toc-text">本题代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode692-Top-K-Frequent-Words"><span class="post-toc-text">Leetcode692 Top K Frequent Words</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本题代码-1"><span class="post-toc-text">本题代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode347-Top-K-Frequent-Elements"><span class="post-toc-text">Leetcode347 Top K Frequent Elements</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本题代码-2"><span class="post-toc-text">本题代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/10/Minimum-Cost-to-Connect-Sticks-Solution/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Minimum Cost to Connect Sticks Solution</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2020 Robin<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://Roooooobin.github.io",
+      animate: false,
+      isHome: false,
+      share: true,
+      reward: 1
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            <a class="category-link" href="/categories/Interview/">Interview</a><a class="category-link" href="/categories/Notes/">Notes</a><a class="category-link" href="/categories/Programming-Problem/">Programming Problem</a>
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/Amazon/" style="font-size: 15px;">Amazon</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Binary-Search/" style="font-size: 10px;">Binary Search</a> <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Hashmap/" style="font-size: 10px;">Hashmap</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/OA/" style="font-size: 10px;">OA</a> <a href="/tags/Priority-Queue/" style="font-size: 10px;">Priority Queue</a> <a href="/tags/Sorting/" style="font-size: 10px;">Sorting</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/about">
+                    <i class="fa fa-user"></i><span>About</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/Amazon/" style="font-size: 15px;">Amazon</a> <a href="/tags/BFS/" style="font-size: 10px;">BFS</a> <a href="/tags/Binary-Search/" style="font-size: 10px;">Binary Search</a> <a href="/tags/Core-Java/" style="font-size: 10px;">Core Java</a> <a href="/tags/DFS/" style="font-size: 10px;">DFS</a> <a href="/tags/Hashmap/" style="font-size: 10px;">Hashmap</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/OA/" style="font-size: 10px;">OA</a> <a href="/tags/Priority-Queue/" style="font-size: 10px;">Priority Queue</a> <a href="/tags/Sorting/" style="font-size: 10px;">Sorting</a> <a href="/tags/Wordpress/" style="font-size: 10px;">Wordpress</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  
+<script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/pop-img.js"></script>
+
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>

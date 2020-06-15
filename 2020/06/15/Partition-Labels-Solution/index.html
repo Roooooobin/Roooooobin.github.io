@@ -3,24 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Optimal Utilization Solution | Robin&#39;s site</title>
+  <title>Partition Labels Solution | Robin&#39;s site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="Robin,Robin's Blog" />
   
-  <meta name="description" content="Optimal Utilization原题地址  给定两个列表a和b，每个列表都是由若干个整数对组成，第一个整数表示id，第二个整数表示值。 分别从a和b各取一个元素（整数对）使得值的和小于等于且尽可能接近于目标值，找出所有这样的组合并且返回他们的id  题面中是两个数的和等于或接近于某一个目标值，一般都是双指针题，按值排序后，一个指针指向头，一个指针指向尾，然后根据大小关系移动。 本题有个关键点">
+  <meta name="description" content="Leetcode763 Partition Labels原题地址  给定一个仅包含小写字母的字符串，问分隔为尽可能多的部分，使得每一个字母仅仅出现在一个部分中，返回分隔的各个部分的长度  对于每个出现的字母，都有最早出现和最晚出现（如果仅出现一次则最早就是最晚）的下标，那么包含这个字母的部分最短最短也要是最早下标到最晚出现下标这一段。然而对每个字母都是如此，所以我们只能取最晚最晚的那个下标才能分隔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Optimal Utilization Solution">
-<meta property="og:url" content="http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/index.html">
+<meta property="og:title" content="Partition Labels Solution">
+<meta property="og:url" content="http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/index.html">
 <meta property="og:site_name" content="Robin&#39;s site">
-<meta property="og:description" content="Optimal Utilization原题地址  给定两个列表a和b，每个列表都是由若干个整数对组成，第一个整数表示id，第二个整数表示值。 分别从a和b各取一个元素（整数对）使得值的和小于等于且尽可能接近于目标值，找出所有这样的组合并且返回他们的id  题面中是两个数的和等于或接近于某一个目标值，一般都是双指针题，按值排序后，一个指针指向头，一个指针指向尾，然后根据大小关系移动。 本题有个关键点">
+<meta property="og:description" content="Leetcode763 Partition Labels原题地址  给定一个仅包含小写字母的字符串，问分隔为尽可能多的部分，使得每一个字母仅仅出现在一个部分中，返回分隔的各个部分的长度  对于每个出现的字母，都有最早出现和最晚出现（如果仅出现一次则最早就是最晚）的下标，那么包含这个字母的部分最短最短也要是最早下标到最晚出现下标这一段。然而对每个字母都是如此，所以我们只能取最晚最晚的那个下标才能分隔">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-13T13:10:42.000Z">
-<meta property="article:modified_time" content="2020-06-13T13:50:57.159Z">
+<meta property="article:published_time" content="2020-06-15T11:38:11.000Z">
+<meta property="article:modified_time" content="2020-06-15T11:55:14.324Z">
 <meta property="article:author" content="Robin">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Amazon">
-<meta property="article:tag" content="Two Pointer">
+<meta property="article:tag" content="Greedy">
 <meta name="twitter:card" content="summary">
   
   
@@ -116,14 +116,14 @@
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-Optimal-Utilization-Solution" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-Partition-Labels-Solution" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      Optimal Utilization Solution
+      Partition Labels Solution
     </h1>
     <div class="post-title-bar">
       <ul>
@@ -136,7 +136,7 @@
               </li>
           
         <li>
-          <i class="fa fa-calendar"></i>  2020-06-13
+          <i class="fa fa-calendar"></i>  2020-06-15
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -152,22 +152,19 @@
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h2 id="Optimal-Utilization"><a href="#Optimal-Utilization" class="headerlink" title="Optimal Utilization"></a>Optimal Utilization</h2><p><a href="https://leetcode.com/discuss/interview-question/373202" target="_blank" rel="noopener">原题地址</a></p>
+            <h1 id="Leetcode763-Partition-Labels"><a href="#Leetcode763-Partition-Labels" class="headerlink" title="Leetcode763 Partition Labels"></a>Leetcode763 Partition Labels</h1><p><a href="https://leetcode.com/problems/partition-labels/" target="_blank" rel="noopener">原题地址</a></p>
 <blockquote>
-<p>给定两个列表a和b，每个列表都是由若干个整数对组成，第一个整数表示id，第二个整数表示值。</p>
-<p>分别从a和b各取一个元素（整数对）使得值的和小于等于且尽可能接近于目标值，找出所有这样的组合并且返回他们的id</p>
+<p>给定一个仅包含小写字母的字符串，问分隔为尽可能多的部分，使得每一个字母仅仅出现在一个部分中，返回分隔的各个部分的长度</p>
 </blockquote>
-<p>题面中是两个数的和等于或接近于某一个目标值，一般都是双指针题，按值排序后，一个指针指向头，一个指针指向尾，然后根据大小关系移动。</p>
-<p>本题有个关键点，也是很多题解忽视了的，就是要找到<strong>所有的满足条件的组合</strong>，那么当<strong>目前两个指针指向的元素值小于或等于目标值时，不能算完当前就将左指针往右移动了</strong>，而是应该考虑到<strong>右指针指向的值在左边是否有重复值</strong>，需要遍历这些重复值，否则会漏。<br>比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;&#123;<span class="number">1</span>, <span class="number">5</span>&#125;, &#123;<span class="number">2</span>, <span class="number">7</span>&#125;&#125;;</span><br><span class="line">b = &#123;&#123;<span class="number">2</span>, <span class="number">4</span>&#125;, &#123;<span class="number">3</span>, <span class="number">4</span>&#125;&#125;;</span><br><span class="line">target = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>对于每个出现的字母，都有最早出现和最晚出现（如果仅出现一次则最早就是最晚）的下标，那么包含这个字母的部分最短最短也要是最早下标到最晚出现下标这一段。然而对每个字母都是如此，所以我们只能取最晚最晚的那个下标才能分隔。</p>
+<p>举个栗子，比如第一个字母是a，最早出现下标是0，最晚是6，那么这一段最短就是[0-6]，长度为7，但是在下标1到下标5会出现其他的字母，比如下标1对应字母b，他最晚出现的下标是12，那么这一段最短就变为了[0-12]，长度为13了，同理在“沿途”中还有可能会继续更新这个最晚下标，导致这一部分长度变长，直到再也没有字母的最晚出现下标比当前这段所记录的最晚下标还远，则表示这段可以分隔了。</p>
+<p>如此往复</p>
+<h2 id="本题代码"><a href="#本题代码" class="headerlink" title="本题代码"></a>本题代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Integer&gt; <span class="title">partitionLabels</span><span class="params">(String S)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] lastPosition = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;S.length(); ++i) &#123;</span><br><span class="line">        lastPosition[S.charAt(i) - <span class="string">'a'</span>] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;Integer&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> curLast = <span class="number">0</span>;    <span class="comment">// 目前最远的</span></span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>;    <span class="comment">// 因为答案是每一段的长度, 所以设置pos记录每一段的头下标</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;S.length(); ++i) &#123;</span><br><span class="line">        <span class="comment">// 还有更远的，则更新</span></span><br><span class="line">        curLast = Math.max(curLast, lastPosition[S.charAt(i) - <span class="string">'a'</span>]);</span><br><span class="line">        <span class="comment">// 没有更远的了，分隔</span></span><br><span class="line">        <span class="keyword">if</span> (i == curLast) &#123;</span><br><span class="line">            ans.add(i - pos + <span class="number">1</span>);</span><br><span class="line">            pos = i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>当左指针i=0, 右指针j=1时，此时和为9小于10，得到一对{1, 3}，所以应该是左指针向右，但是如果这里不去考虑右指针重复值，就会错失一对答案{1, 2}</p>
-<p>另外，如果本题去除小于等于目标值，而是只是尽可能接近于目标值，那么也就是大于等于和小于等于两端接近，这时候还需要考虑左指针指向的值是否有重复了。</p>
-<h2 id="本题代码"><a href="#本题代码" class="headerlink" title="本题代码"></a>本题代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;<span class="keyword">int</span>[]&gt; getPairs(<span class="keyword">int</span>[][] a, <span class="keyword">int</span>[][] b, <span class="keyword">int</span> target) &#123;</span><br><span class="line">    Arrays.sort(a, Comparator.comparingInt(x -&gt; x[<span class="number">1</span>]));</span><br><span class="line">    Arrays.sort(b, Comparator.comparingInt(x -&gt; x[<span class="number">1</span>]));</span><br><span class="line">    List&lt;<span class="keyword">int</span>[]&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> n = a.length;</span><br><span class="line">    <span class="keyword">int</span> m = b.length;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = m-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> max = Integer.MIN_VALUE;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> sum = a[i][<span class="number">1</span>] + b[j][<span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 比target大，要减小和，右指针向左移</span></span><br><span class="line">        <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">            --j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (max &lt;= sum) &#123;</span><br><span class="line">                <span class="comment">// 如果找到了更大的sum，那么前面存储的都无效了，更新最大值并清除</span></span><br><span class="line">                <span class="keyword">if</span> (max &lt; sum) &#123;</span><br><span class="line">                    max = sum;</span><br><span class="line">                    ans.clear();</span><br><span class="line">                &#125;</span><br><span class="line">                ans.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;a[i][<span class="number">0</span>], b[j][<span class="number">0</span>]&#125;);</span><br><span class="line">                <span class="keyword">int</span> idx = j-<span class="number">1</span>;</span><br><span class="line">                <span class="comment">// 重复值都加入</span></span><br><span class="line">                <span class="keyword">while</span> (idx &gt;= <span class="number">0</span> &amp;&amp; b[idx][<span class="number">1</span>] == b[idx+<span class="number">1</span>][<span class="number">1</span>]) &#123;</span><br><span class="line">                    ans.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;a[i][<span class="number">0</span>], b[idx--][<span class="number">0</span>]&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2020年06月13日 21:50</p>
-        <p>原始链接： <a class="post-url" href="/2020/06/13/Optimal-Utilization-Solution/" title="Optimal Utilization Solution">http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/</a></p>
+        <p>最后更新： 2020年06月15日 19:55</p>
+        <p>原始链接： <a class="post-url" href="/2020/06/15/Partition-Labels-Solution/" title="Partition Labels Solution">http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/</a></p>
         <footer>
             <a href="http://Roooooobin.github.io">
                 <img src="/images/logo.png" alt="Robin">
@@ -220,7 +217,7 @@
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/&title=《Optimal Utilization Solution》 — Robin's site&pic=images/leetcode.jpg" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/&title=《Partition Labels Solution》 — Robin's site&pic=images/leetcode.jpg" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -230,22 +227,22 @@
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/&title=《Optimal Utilization Solution》 — Robin's site&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/&title=《Partition Labels Solution》 — Robin's site&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Optimal Utilization Solution》 — Robin's site&url=http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/&via=http://Roooooobin.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Partition Labels Solution》 — Robin's site&url=http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/&via=http://Roooooobin.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -255,7 +252,7 @@
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/06/13/Optimal-Utilization-Solution/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://roooooobin.github.io/2020/06/15/Partition-Labels-Solution/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -271,7 +268,7 @@
       
     <a href="/tags/Amazon/" class="color2">Amazon</a>
       
-    <a href="/tags/TwoPointer/" class="color2">Two Pointer</a>
+    <a href="/tags/Greedy/" class="color2">Greedy</a>
       
   </li>
 
@@ -293,26 +290,16 @@ conf: 'prod_94d118afbe3ae19b5a2ee255feaba665'
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Optimal-Utilization"><span class="post-toc-text">Optimal Utilization</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本题代码"><span class="post-toc-text">本题代码</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Leetcode763-Partition-Labels"><span class="post-toc-text">Leetcode763 Partition Labels</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本题代码"><span class="post-toc-text">本题代码</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2020/06/15/Partition-Labels-Solution/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          Partition Labels Solution
-        
-      </span>
-    </a>
   
-  
-    <a href="/2020/06/12/Search-a-2D-Matrix-II-Solution/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">Search a 2D Matrix II Solution</span>
+    <a href="/2020/06/13/Optimal-Utilization-Solution/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Optimal Utilization Solution</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
